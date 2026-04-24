@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-label="Spinning reel illustration">
+  <defs>
+    <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F4C5C"/>
+      <stop offset="1" stop-color="#5A7A5B"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" fill="none"/>
+  <rect x="135" y="35" width="30" height="40" rx="4" fill="#1B4B5A"/>
+  <rect x="120" y="70" width="60" height="20" rx="6" fill="#0F4C5C"/>
+  <ellipse cx="150" cy="125" rx="62" ry="38" fill="url(#rg)"/>
+  <ellipse cx="150" cy="125" rx="42" ry="24" fill="#FAF8F3"/>
+  <ellipse cx="150" cy="125" rx="42" ry="24" fill="none" stroke="#0F4C5C" stroke-width="1.5"/>
+  <circle cx="150" cy="125" r="6" fill="#E76F51"/>
+  <path d="M210 125 Q 230 110 245 130" stroke="#0F4C5C" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="248" cy="132" r="5" fill="#1B4B5A"/>
+</svg>

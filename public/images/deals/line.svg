@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-label="Line spool illustration">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5A7A5B"/>
+      <stop offset="1" stop-color="#0F4C5C"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" fill="none"/>
+  <ellipse cx="150" cy="55" rx="70" ry="14" fill="#1B4B5A"/>
+  <rect x="80" y="55" width="140" height="90" fill="url(#lg)"/>
+  <ellipse cx="150" cy="145" rx="70" ry="14" fill="#0F4C5C"/>
+  <g stroke="#FAF8F3" stroke-width="0.8" opacity="0.55">
+    <line x1="80" y1="70"  x2="220" y2="70"/>
+    <line x1="80" y1="85"  x2="220" y2="85"/>
+    <line x1="80" y1="100" x2="220" y2="100"/>
+    <line x1="80" y1="115" x2="220" y2="115"/>
+    <line x1="80" y1="130" x2="220" y2="130"/>
+  </g>
+  <path d="M220 100 Q 250 95 260 120 T 270 160" stroke="#E76F51" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

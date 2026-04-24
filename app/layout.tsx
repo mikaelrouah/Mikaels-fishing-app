@@ -17,11 +17,11 @@ const sans = Inter({
 export const metadata: Metadata = {
   title: "Cape Angler — Knots, Spots & Gear for Cape Town Fishing",
   description:
-    "A focused, no-nonsense reference for recreational anglers fishing the Cape. Essential knots, top Cape Town fishing spots, curated reading and current rod deals.",
+    "A focused, no-nonsense reference for recreational anglers fishing the Cape. Essential knots, top Cape Town fishing spots, curated reading and current gear deals.",
   openGraph: {
     title: "Cape Angler",
     description:
-      "Essential knots, top Cape Town fishing spots, curated reading and current rod deals.",
+      "Essential knots, top Cape Town fishing spots, curated reading and current gear deals — rods, reels, line, lures, sabikis and tools.",
     type: "website"
   }
 };

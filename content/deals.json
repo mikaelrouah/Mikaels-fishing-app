@@ -1,60 +1,467 @@
 {
   "lastUpdated": "2026-04-24",
-  "deals": [
+  "categories": [
     {
-      "id": "kingfisher-classic-surf",
-      "name": "Kingfisher Classic Surf Rod",
-      "spec": "3.9 m · medium-heavy · 6–10 kg line",
-      "image": "/images/deals/rod-1.svg",
-      "originalPrice": 1299,
-      "salePrice": 899,
-      "currency": "ZAR",
-      "retailer": "Sportsmans Warehouse",
-      "url": "https://www.sportsmanswarehouse.co.za/"
+      "id": "rods",
+      "name": "Rods",
+      "blurb": "From entry-level surf casters to dedicated boat rods.",
+      "items": [
+        {
+          "id": "rovex-airstrike-light",
+          "name": "Rovex Airstrike Light Spin Rod",
+          "spec": "2.1 m · ultra-light · 2–4 kg line",
+          "tier": "beginner",
+          "image": "/images/deals/rod-5.svg",
+          "originalPrice": 849,
+          "salePrice": 599,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=rovex+airstrike"
+        },
+        {
+          "id": "kingfisher-classic-surf",
+          "name": "Kingfisher Classic Surf Rod",
+          "spec": "3.9 m · medium-heavy · 6–10 kg line",
+          "tier": "beginner",
+          "image": "/images/deals/rod-1.svg",
+          "originalPrice": 1299,
+          "salePrice": 899,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "shimano-catana-spin",
+          "name": "Shimano Catana FX Spinning Rod",
+          "spec": "2.4 m · medium · 4–8 kg line",
+          "tier": "intermediate",
+          "image": "/images/deals/rod-2.svg",
+          "originalPrice": 1499,
+          "salePrice": 1099,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=shimano+catana"
+        },
+        {
+          "id": "daiwa-crossfire-travel",
+          "name": "Daiwa Crossfire Travel Rod",
+          "spec": "2.1 m · 4-piece · 3–6 kg line",
+          "tier": "intermediate",
+          "image": "/images/deals/rod-3.svg",
+          "originalPrice": 1899,
+          "salePrice": 1499,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "penn-wrath-boat",
+          "name": "Penn Wrath Boat Rod",
+          "spec": "2.1 m · heavy · 8–15 kg line",
+          "tier": "pro",
+          "image": "/images/deals/rod-4.svg",
+          "originalPrice": 2299,
+          "salePrice": 1799,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        }
+      ]
     },
     {
-      "id": "shimano-catana-spin",
-      "name": "Shimano Catana Spinning Rod",
-      "spec": "2.4 m · medium · 4–8 kg line",
-      "image": "/images/deals/rod-2.svg",
-      "originalPrice": 1499,
-      "salePrice": 1099,
-      "currency": "ZAR",
-      "retailer": "Takealot",
-      "url": "https://www.takealot.com/"
+      "id": "reels",
+      "name": "Reels",
+      "blurb": "Sealed bearings and smooth drags — proven workhorses at every price.",
+      "items": [
+        {
+          "id": "shimano-sienna-4000",
+          "name": "Shimano Sienna 4000 FG",
+          "spec": "Front drag · 4 kg max · 4.7:1 ratio",
+          "tier": "beginner",
+          "image": "/images/deals/reel.svg",
+          "originalPrice": 1299,
+          "salePrice": 1099,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "rovex-powerspin-4000",
+          "name": "Rovex Powerspin 4000",
+          "spec": "Saltwater spin · 6+1 BB · graphite body",
+          "tier": "beginner",
+          "image": "/images/deals/reel.svg",
+          "originalPrice": 749,
+          "salePrice": 549,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=rovex+powerspin"
+        },
+        {
+          "id": "penn-battle-iii-5000",
+          "name": "Penn Battle III 5000",
+          "spec": "Full metal body · 6+1 BB · 9 kg drag",
+          "tier": "intermediate",
+          "image": "/images/deals/reel.svg",
+          "originalPrice": 3499,
+          "salePrice": 2899,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "daiwa-bg-mq-4000",
+          "name": "Daiwa BG MQ 4000",
+          "spec": "Monocoque body · 10 kg drag · sealed",
+          "tier": "intermediate",
+          "image": "/images/deals/reel.svg",
+          "originalPrice": 3899,
+          "salePrice": 3299,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "shimano-stradic-fm-5000",
+          "name": "Shimano Stradic FM 5000",
+          "spec": "X-Protect · Infinity Drive · 11 kg drag",
+          "tier": "pro",
+          "image": "/images/deals/reel.svg",
+          "originalPrice": 7299,
+          "salePrice": 6499,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "shimano-saragosa-sw-8000",
+          "name": "Shimano Saragosa SW 8000",
+          "spec": "Heavy offshore spin · 13 kg drag · X-Shield",
+          "tier": "pro",
+          "image": "/images/deals/reel.svg",
+          "originalPrice": 8999,
+          "salePrice": 7999,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        }
+      ]
     },
     {
-      "id": "daiwa-crossfire-travel",
-      "name": "Daiwa Crossfire Travel Rod",
-      "spec": "2.1 m · 4-piece · 3–6 kg line",
-      "image": "/images/deals/rod-3.svg",
-      "originalPrice": 1899,
-      "salePrice": 1499,
-      "currency": "ZAR",
-      "retailer": "African Outdoor",
-      "url": "https://africanoutdoor.co.za/"
+      "id": "line-leader",
+      "name": "Line & Leader",
+      "blurb": "Mainline braid, mono and fluorocarbon leaders — the brands the regulars actually spool with.",
+      "items": [
+        {
+          "id": "berkley-trilene-big-game",
+          "name": "Berkley Trilene Big Game Mono",
+          "spec": "0.40 mm · 600 m · clear",
+          "tier": "beginner",
+          "image": "/images/deals/line.svg",
+          "originalPrice": 299,
+          "salePrice": 249,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=berkley+trilene+big+game"
+        },
+        {
+          "id": "daiwa-jbraid-x8",
+          "name": "Daiwa J-Braid X8",
+          "spec": "0.18 mm · 300 m · 8-strand",
+          "tier": "intermediate",
+          "image": "/images/deals/line.svg",
+          "originalPrice": 749,
+          "salePrice": 599,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "sufix-832-braid",
+          "name": "Sufix 832 Advanced Superline",
+          "spec": "20 lb · 270 m · 8-fibre",
+          "tier": "intermediate",
+          "image": "/images/deals/line.svg",
+          "originalPrice": 999,
+          "salePrice": 849,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "powerpro-super-slick-v2",
+          "name": "PowerPro Super 8 Slick V2",
+          "spec": "30 lb · 275 m · ultra-smooth braid",
+          "tier": "pro",
+          "image": "/images/deals/line.svg",
+          "originalPrice": 1199,
+          "salePrice": 999,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "seaguar-blue-label-fluoro",
+          "name": "Seaguar Blue Label Fluorocarbon Leader",
+          "spec": "25 lb · 25 yd · near-invisible",
+          "tier": "pro",
+          "image": "/images/deals/line.svg",
+          "originalPrice": 849,
+          "salePrice": 699,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        }
+      ]
     },
     {
-      "id": "penn-wrath-boat",
-      "name": "Penn Wrath Boat Rod",
-      "spec": "2.1 m · heavy · 8–15 kg line",
-      "image": "/images/deals/rod-4.svg",
-      "originalPrice": 2299,
-      "salePrice": 1799,
-      "currency": "ZAR",
-      "retailer": "Sportsmans Warehouse",
-      "url": "https://www.sportsmanswarehouse.co.za/"
+      "id": "lures",
+      "name": "Lures",
+      "blurb": "Poppers, stickbaits, jigs and soft plastics — proven movers from inshore to offshore.",
+      "items": [
+        {
+          "id": "halco-roosta-popper-105",
+          "name": "Halco Roosta Popper 105",
+          "spec": "105 mm · 32 g · floating popper",
+          "tier": "beginner",
+          "image": "/images/deals/lure.svg",
+          "originalPrice": 229,
+          "salePrice": 189,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "storm-wildeye-swim-shad",
+          "name": "Storm WildEye Swim Shad (3-pack)",
+          "spec": "10 cm · pre-rigged soft swimbaits",
+          "tier": "beginner",
+          "image": "/images/deals/lure.svg",
+          "originalPrice": 199,
+          "salePrice": 149,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=storm+wildeye"
+        },
+        {
+          "id": "rapala-xrap-magnum-15",
+          "name": "Rapala X-Rap Magnum 15",
+          "spec": "15 cm · 46 g · deep-diving trolling lure",
+          "tier": "intermediate",
+          "image": "/images/deals/lure.svg",
+          "originalPrice": 349,
+          "salePrice": 299,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "berkley-gulp-shrimp",
+          "name": "Berkley Gulp! Saltwater Shrimp",
+          "spec": "3″ · 12 per pack · scented soft bait",
+          "tier": "intermediate",
+          "image": "/images/deals/lure.svg",
+          "originalPrice": 199,
+          "salePrice": 169,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=berkley+gulp+shrimp"
+        },
+        {
+          "id": "daiwa-salt-pro-minnow",
+          "name": "Daiwa Salt Pro Minnow Sinking",
+          "spec": "170 mm · 78 g · slow-sinking jerkbait",
+          "tier": "pro",
+          "image": "/images/deals/lure.svg",
+          "originalPrice": 399,
+          "salePrice": 349,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "maria-loaded-stickbait",
+          "name": "Maria Loaded Stickbait F180",
+          "spec": "180 mm · 80 g · floating GT stickbait",
+          "tier": "pro",
+          "image": "/images/deals/lure.svg",
+          "originalPrice": 699,
+          "salePrice": 599,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        }
+      ]
     },
     {
-      "id": "rovex-airstrike-light",
-      "name": "Rovex Airstrike Light Spin Rod",
-      "spec": "2.1 m · ultra-light · 2–4 kg line",
-      "image": "/images/deals/rod-5.svg",
-      "originalPrice": 849,
-      "salePrice": 599,
-      "currency": "ZAR",
-      "retailer": "Takealot",
-      "url": "https://www.takealot.com/"
+      "id": "terminal",
+      "name": "Terminal Tackle & Sabikis",
+      "blurb": "Hooks, swivels and ready-to-fish sabiki rigs — the bits that actually touch the fish.",
+      "items": [
+        {
+          "id": "hayabusa-sabiki-ex121",
+          "name": "Hayabusa Sabiki Rig EX121",
+          "spec": "Size 6 · 6-hook · flash bait rig",
+          "tier": "beginner",
+          "image": "/images/deals/terminal.svg",
+          "originalPrice": 79,
+          "salePrice": 59,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "kingfisher-bait-jig-sabiki",
+          "name": "Kingfisher Bait Jig Sabiki",
+          "spec": "Size 4 · 6-hook · luminous skin",
+          "tier": "beginner",
+          "image": "/images/deals/terminal.svg",
+          "originalPrice": 65,
+          "salePrice": 49,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "mustad-demon-circle-4-0",
+          "name": "Mustad Demon Perfect Circle Hooks",
+          "spec": "4/0 · 25-pack · in-line circle",
+          "tier": "beginner",
+          "image": "/images/deals/terminal.svg",
+          "originalPrice": 119,
+          "salePrice": 89,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=mustad+demon+circle"
+        },
+        {
+          "id": "owner-mosquito-hooks",
+          "name": "Owner Mosquito Hooks",
+          "spec": "Size 1/0 · 9-pack · super-sharp light wire",
+          "tier": "intermediate",
+          "image": "/images/deals/terminal.svg",
+          "originalPrice": 169,
+          "salePrice": 139,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "spro-power-swivels",
+          "name": "Spro Power Swivels",
+          "spec": "Size 6 · 10-pack · 36 kg rated",
+          "tier": "intermediate",
+          "image": "/images/deals/terminal.svg",
+          "originalPrice": 99,
+          "salePrice": 79,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "vmc-inline-single-hooks",
+          "name": "VMC Tournament Inline Single Hooks",
+          "spec": "1X strong · 5-pack · lure replacement",
+          "tier": "pro",
+          "image": "/images/deals/terminal.svg",
+          "originalPrice": 199,
+          "salePrice": 169,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "mustad-penetrator-8-0",
+          "name": "Mustad Penetrator Hooks 8/0",
+          "spec": "8/0 · 7-pack · big-bait big-fish hook",
+          "tier": "pro",
+          "image": "/images/deals/terminal.svg",
+          "originalPrice": 149,
+          "salePrice": 119,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "name": "Tools & Accessories",
+      "blurb": "Pliers, line snips, headlamps and tackle storage — the kit that earns its keep on every trip.",
+      "items": [
+        {
+          "id": "eagle-claw-pliers",
+          "name": "Eagle Claw Fishing Pliers",
+          "spec": "6.5″ · stainless · split-ring tip",
+          "tier": "beginner",
+          "image": "/images/deals/tools.svg",
+          "originalPrice": 199,
+          "salePrice": 149,
+          "currency": "ZAR",
+          "retailer": "Takealot",
+          "url": "https://www.takealot.com/all?qsearch=eagle+claw+pliers"
+        },
+        {
+          "id": "berkley-line-snippers",
+          "name": "Berkley Line Snippers",
+          "spec": "Stainless · braid-rated · lanyard hole",
+          "tier": "beginner",
+          "image": "/images/deals/tools.svg",
+          "originalPrice": 119,
+          "salePrice": 89,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "plano-3700-pro-latch",
+          "name": "Plano 3700 Pro-Latch StowAway",
+          "spec": "Adjustable dividers · O-ring sealed",
+          "tier": "intermediate",
+          "image": "/images/deals/tools.svg",
+          "originalPrice": 449,
+          "salePrice": 349,
+          "currency": "ZAR",
+          "retailer": "Sportsmans Warehouse",
+          "url": "https://www.sportsmanswarehouse.co.za/"
+        },
+        {
+          "id": "petzl-tikkina-headlamp",
+          "name": "Petzl Tikkina Headlamp",
+          "spec": "300 lumens · 3 modes · IPX4",
+          "tier": "intermediate",
+          "image": "/images/deals/tools.svg",
+          "originalPrice": 549,
+          "salePrice": 449,
+          "currency": "ZAR",
+          "retailer": "Cape Union Mart",
+          "url": "https://www.capeunionmart.co.za/"
+        },
+        {
+          "id": "rapala-magnetic-pliers",
+          "name": "Rapala Magnetic Release Pliers",
+          "spec": "8.5″ · aluminium · sheath included",
+          "tier": "pro",
+          "image": "/images/deals/tools.svg",
+          "originalPrice": 849,
+          "salePrice": 699,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        },
+        {
+          "id": "boga-grip-15lb",
+          "name": "Boga Grip Lip Grip",
+          "spec": "15 lb · stainless · built-in scale",
+          "tier": "pro",
+          "image": "/images/deals/tools.svg",
+          "originalPrice": 1799,
+          "salePrice": 1499,
+          "currency": "ZAR",
+          "retailer": "African Outdoor",
+          "url": "https://africanoutdoor.co.za/"
+        }
+      ]
     }
   ]
 }
