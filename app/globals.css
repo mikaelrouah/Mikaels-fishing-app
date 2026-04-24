@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  background-color: #FAF8F3;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(15, 76, 92, 0.035) 1px, transparent 0);
+  background-size: 18px 18px;
+  color: #1A1A1A;
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-display), Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+  h1 { line-height: 1.05; }
+  h2 { line-height: 1.1; }
+  p  { line-height: 1.65; }
+  :focus-visible {
+    outline: 2px solid #E76F51;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply mx-auto w-full max-w-6xl px-5 md:px-8;
+  }
+  .section-heading {
+    @apply font-display text-3xl md:text-5xl text-ocean tracking-tight;
+  }
+  .eyebrow {
+    @apply text-xs md:text-sm uppercase tracking-[0.22em] font-medium text-kelp;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-ocean px-5 py-2.5 text-sm font-medium text-paper transition-all hover:bg-ocean-deep hover:shadow-lift;
+  }
+  .btn-coral {
+    @apply inline-flex items-center justify-center rounded-full bg-coral px-5 py-2.5 text-sm font-medium text-paper transition-all hover:bg-coral-soft hover:shadow-lift;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full border border-ocean/20 px-5 py-2.5 text-sm font-medium text-ocean transition-all hover:border-ocean/40 hover:bg-ocean/5;
+  }
+  .card {
+    @apply rounded-2xl bg-paper border border-ocean/10 shadow-card transition-all;
+  }
+}
+
+/* Scroll-triggered reveal. Inert by default; becomes animated when in-view class is toggled. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide scrollbar for the horizontal deal carousel on mobile */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

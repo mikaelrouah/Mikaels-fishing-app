@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-label="Ultralight rod illustration">
+  <line x1="45" y1="140" x2="265" y2="80" stroke="#5A7A5B" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="30" y="135" width="38" height="10" rx="4" fill="#1B4B5A"/>
+  <circle cx="65" cy="140" r="9" fill="#E76F51"/>
+  <circle cx="65" cy="140" r="3.5" fill="#FAF8F3"/>
+</svg>

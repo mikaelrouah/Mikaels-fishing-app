@@ -1,0 +1,60 @@
+{
+  "lastUpdated": "2026-04-24",
+  "deals": [
+    {
+      "id": "kingfisher-classic-surf",
+      "name": "Kingfisher Classic Surf Rod",
+      "spec": "3.9 m · medium-heavy · 6–10 kg line",
+      "image": "/images/deals/rod-1.svg",
+      "originalPrice": 1299,
+      "salePrice": 899,
+      "currency": "ZAR",
+      "retailer": "Sportsmans Warehouse",
+      "url": "https://www.sportsmanswarehouse.co.za/"
+    },
+    {
+      "id": "shimano-catana-spin",
+      "name": "Shimano Catana Spinning Rod",
+      "spec": "2.4 m · medium · 4–8 kg line",
+      "image": "/images/deals/rod-2.svg",
+      "originalPrice": 1499,
+      "salePrice": 1099,
+      "currency": "ZAR",
+      "retailer": "Takealot",
+      "url": "https://www.takealot.com/"
+    },
+    {
+      "id": "daiwa-crossfire-travel",
+      "name": "Daiwa Crossfire Travel Rod",
+      "spec": "2.1 m · 4-piece · 3–6 kg line",
+      "image": "/images/deals/rod-3.svg",
+      "originalPrice": 1899,
+      "salePrice": 1499,
+      "currency": "ZAR",
+      "retailer": "African Outdoor",
+      "url": "https://africanoutdoor.co.za/"
+    },
+    {
+      "id": "penn-wrath-boat",
+      "name": "Penn Wrath Boat Rod",
+      "spec": "2.1 m · heavy · 8–15 kg line",
+      "image": "/images/deals/rod-4.svg",
+      "originalPrice": 2299,
+      "salePrice": 1799,
+      "currency": "ZAR",
+      "retailer": "Sportsmans Warehouse",
+      "url": "https://www.sportsmanswarehouse.co.za/"
+    },
+    {
+      "id": "rovex-airstrike-light",
+      "name": "Rovex Airstrike Light Spin Rod",
+      "spec": "2.1 m · ultra-light · 2–4 kg line",
+      "image": "/images/deals/rod-5.svg",
+      "originalPrice": 849,
+      "salePrice": 599,
+      "currency": "ZAR",
+      "retailer": "Takealot",
+      "url": "https://www.takealot.com/"
+    }
+  ]
+}

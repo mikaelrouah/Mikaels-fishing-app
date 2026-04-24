@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Stylised Cape coastal scene at sunrise">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FCE8DA"/>
+      <stop offset="0.55" stop-color="#F5D1B7"/>
+      <stop offset="1" stop-color="#E8A884"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1B4B5A"/>
+      <stop offset="1" stop-color="#0A3A47"/>
+    </linearGradient>
+    <linearGradient id="farHill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E5660" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#1B4B5A" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+
+  <!-- Sun -->
+  <circle cx="1180" cy="420" r="70" fill="#F7C59F" opacity="0.9"/>
+  <circle cx="1180" cy="420" r="110" fill="#F7C59F" opacity="0.25"/>
+
+  <!-- Far mountains (Table Mountain / Hottentots-Holland suggestion) -->
+  <path d="M0 560 L160 500 L260 520 L400 470 L520 500 L660 450 L820 500 L980 470 L1180 510 L1350 485 L1600 515 L1600 620 L0 620 Z" fill="url(#farHill)"/>
+
+  <!-- Sea -->
+  <rect y="600" width="1600" height="300" fill="url(#sea)"/>
+  <!-- Highlight strokes on water -->
+  <g stroke="#FAF8F3" stroke-opacity="0.18" stroke-width="1.2" fill="none">
+    <path d="M60 660 Q 220 655 360 662 T 680 665"/>
+    <path d="M520 700 Q 700 695 880 703 T 1240 706"/>
+    <path d="M120 760 Q 320 755 520 762 T 900 765"/>
+    <path d="M800 800 Q 1000 796 1200 803 T 1520 805"/>
+  </g>
+
+  <!-- Foreground rock / ledge -->
+  <path d="M0 780 Q 160 720 360 760 Q 520 810 720 770 Q 860 740 1000 775 Q 1200 820 1400 790 Q 1500 770 1600 790 L1600 900 L0 900 Z" fill="#0F4C5C"/>
+
+  <!-- Angler silhouette with rod -->
+  <g transform="translate(300 520)" fill="#0A3A47">
+    <!-- body -->
+    <ellipse cx="40" cy="200" rx="18" ry="8"/>
+    <path d="M30 120 Q 40 140 36 200 L44 200 Q 52 140 50 120 Z"/>
+    <circle cx="40" cy="108" r="13"/>
+    <!-- arm + rod -->
+    <path d="M46 140 Q 80 130 120 110" stroke="#0A3A47" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- rod line extending out -->
+  <line x1="420" y1="625" x2="740" y2="430" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+  <line x1="740" y1="430" x2="820" y2="640" stroke="#FAF8F3" stroke-width="0.7" stroke-dasharray="2 4" opacity="0.9"/>
+</svg>

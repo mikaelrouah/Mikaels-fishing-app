@@ -1,0 +1,77 @@
+[
+  {
+    "id": "improved-clinch",
+    "name": "Improved Clinch Knot",
+    "useCase": "Your everyday knot for tying line to a hook, lure, or swivel.",
+    "steps": [
+      "Thread the tag end of your line through the eye of the hook and pull about 15 cm through.",
+      "Twist the tag end around the standing line five to seven times, keeping the wraps neat.",
+      "Bring the tag end back and pass it through the small loop just above the hook eye.",
+      "Now feed the tag end through the larger loop you just created.",
+      "Moisten the knot with saliva, then pull the standing line slowly so the coils cinch down against the eye.",
+      "Trim the tag end, leaving roughly 2 mm."
+    ],
+    "youtubeId": "HCjaUcdRDR0",
+    "videoTitle": "Salt Strong — How To Tie The Clinch Knot Video Tutorial"
+  },
+  {
+    "id": "palomar",
+    "name": "Palomar Knot",
+    "useCase": "The strongest knot for attaching terminal tackle when you're fishing braid.",
+    "steps": [
+      "Double about 15 cm of line and pass the loop through the hook eye.",
+      "Tie a loose overhand knot with the doubled line — don't tighten it yet.",
+      "Open the loop at the end and pass the entire hook through it.",
+      "Pull both the tag end and standing line to draw the knot down to the hook eye.",
+      "Wet the knot and pull firmly until it seats tight against the eye.",
+      "Trim the tag end close."
+    ],
+    "youtubeId": "TFk_Ktw2f1w",
+    "videoTitle": "Salt Strong — Palomar Knot: Quick Tutorial"
+  },
+  {
+    "id": "uni",
+    "name": "Uni Knot",
+    "useCase": "Versatile knot — works for line-to-hook and, doubled up, for line-to-line joins.",
+    "steps": [
+      "Pass the tag end through the hook eye and double back alongside the standing line.",
+      "Form a loop by laying the tag end back over the doubled line.",
+      "Wrap the tag end through the loop and around the doubled line six times.",
+      "Moisten the wraps, then pull the tag end to snug the coils together.",
+      "Pull the standing line to slide the tightened knot down to the hook eye.",
+      "Trim the tag end."
+    ],
+    "youtubeId": "3lchV7Ikh1U",
+    "videoTitle": "NetKnots — How to tie the Uni Knot"
+  },
+  {
+    "id": "blood",
+    "name": "Blood Knot",
+    "useCase": "For joining two lines of similar diameter — typically a leader to your mainline.",
+    "steps": [
+      "Overlap the ends of the two lines you want to join by about 15 cm.",
+      "Wrap one tag end around the other line five to seven times and tuck it back between the two lines.",
+      "Hold that tuck in place, then repeat with the other tag end — same wrap count, tucking through the same gap from the opposite side.",
+      "Wet the knot generously.",
+      "Pull the two standing lines apart slowly so the wraps cinch together into a neat barrel.",
+      "Trim both tag ends close to the knot."
+    ],
+    "youtubeId": "A_XJPYTilYI",
+    "videoTitle": "NetKnots — How to tie the Blood Knot"
+  },
+  {
+    "id": "non-slip-loop",
+    "name": "Non-Slip Loop Knot",
+    "useCase": "Creates a fixed loop at the lure so it can swim and move naturally on the retrieve.",
+    "steps": [
+      "Tie a loose overhand knot in the line roughly 20 cm from the tag end — don't tighten.",
+      "Pass the tag end through the lure eye, then back through the overhand loop.",
+      "Wrap the tag end around the standing line five times (use fewer wraps on heavier line).",
+      "Feed the tag end back through the overhand loop, exiting the same side it entered.",
+      "Moisten the knot and pull the tag end to tighten the wraps.",
+      "Pull the standing line to seat the knot, leaving the loop intact. Trim the tag."
+    ],
+    "youtubeId": "C0u5HQBiv_I",
+    "videoTitle": "Salt Strong — How To Tie A Non-Slip Loop Knot"
+  }
+]

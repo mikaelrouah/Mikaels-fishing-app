@@ -1,27 +1,24 @@
-# Workspace
+# Cape Angler
 
 ## Overview
 
-pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
+Single-page reference site for recreational anglers fishing the Cape (knots, spots, reading, rod deals). Pulled from https://github.com/108city/fishing-app.
 
 ## Stack
 
-- **Monorepo tool**: pnpm workspaces
-- **Node.js version**: 24
-- **Package manager**: pnpm
-- **TypeScript version**: 5.9
-- **API framework**: Express 5
-- **Database**: PostgreSQL + Drizzle ORM
-- **Validation**: Zod (`zod/v4`), `drizzle-zod`
-- **API codegen**: Orval (from OpenAPI spec)
-- **Build**: esbuild (CJS bundle)
+- **Framework**: Next.js 15 (App Router) + TypeScript
+- **Styling**: Tailwind CSS
+- **Content**: Static JSON in `/content`
+- **Node**: 24
+- **Package manager**: npm
 
-## Key Commands
+## Commands
 
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- `pnpm --filter @workspace/api-server run dev` — run API server locally
+- `npm run dev` — dev server
+- `npm run build` — production build
+- `npm run start` — serve production build
 
-See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+## Replit setup
+
+- Workflow `Start application` runs `npm run dev -- -p 5000 -H 0.0.0.0` and serves the preview on port 5000.
+- `next.config.mjs` allows Replit dev origins for the iframe preview.

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "kalk-bay",
+    "name": "Kalk Bay Harbour",
+    "type": "Harbour & pier",
+    "lat": -34.1281,
+    "lng": 18.4486,
+    "description": "Working fishing harbour on the False Bay coast. Pier and harbour wall access, good for hottentot, galjoen and the occasional yellowtail. Family-friendly and easy shore access.",
+    "beginnerFriendly": true,
+    "permit": "A recreational saltwater fishing permit (post office) is required."
+  },
+  {
+    "id": "millers-point",
+    "name": "Miller's Point",
+    "type": "Rock & surf",
+    "lat": -34.2334,
+    "lng": 18.4756,
+    "description": "Classic Cape rock-angling venue south of Simon's Town. Deep water close in — targets include kob, yellowtail and geelbek. Watch the swell; not a spot for novices on a pushing tide.",
+    "beginnerFriendly": false,
+    "permit": "Recreational saltwater permit required. Falls within the Table Mountain National Park MPA — check current zoning."
+  },
+  {
+    "id": "simonstown-jetty",
+    "name": "Simon's Town Jetty",
+    "type": "Jetty",
+    "lat": -34.1931,
+    "lng": 18.4326,
+    "description": "Sheltered jetty fishing inside Simon's Town naval harbour area. Hottentot, steentjies and panga from the wall. Good winter option when the rocks are blown out.",
+    "beginnerFriendly": true,
+    "permit": "Recreational saltwater permit required."
+  },
+  {
+    "id": "strand-beach",
+    "name": "Strand Beach",
+    "type": "Surf",
+    "lat": -34.1174,
+    "lng": 18.8260,
+    "description": "Long sandy surf beach on the eastern side of False Bay. Kob, elf (shad) and white steenbras are the main targets. Best fished early morning or late afternoon on a pushing tide.",
+    "beginnerFriendly": true,
+    "permit": "Recreational saltwater permit required. Observe seasonal closures for shad (elf)."
+  },
+  {
+    "id": "muizenberg",
+    "name": "Muizenberg Beach",
+    "type": "Surf",
+    "lat": -34.1083,
+    "lng": 18.4706,
+    "description": "Gentle, wide beach — ideal for beginners learning to cast a surf rod. Shad, kob, and occasional galjoen on a running tide. Shark spotters operate here; heed the flags.",
+    "beginnerFriendly": true,
+    "permit": "Recreational saltwater permit required."
+  },
+  {
+    "id": "cape-point",
+    "name": "Cape Point",
+    "type": "Rock angling",
+    "lat": -34.3568,
+    "lng": 18.4964,
+    "description": "Serious ledge fishing at the tip of the Cape Peninsula. Big yellowtail and kob are possible but the approach is long, the ledges exposed, and the swell unforgiving. For experienced anglers only.",
+    "beginnerFriendly": false,
+    "permit": "Park conservation fee plus recreational saltwater permit. Much of the area is within the MPA — check zoning before fishing."
+  },
+  {
+    "id": "hout-bay-harbour",
+    "name": "Hout Bay Harbour",
+    "type": "Harbour",
+    "lat": -34.0478,
+    "lng": 18.3486,
+    "description": "Harbour wall and breakwater access on the Atlantic side. Hottentot, mackerel and the occasional snoek from the wall during winter runs.",
+    "beginnerFriendly": true,
+    "permit": "Recreational saltwater permit required."
+  },
+  {
+    "id": "milnerton-lagoon",
+    "name": "Milnerton Lagoon",
+    "type": "Estuary",
+    "lat": -33.8836,
+    "lng": 18.4846,
+    "description": "Diep River mouth and lagoon system. Light tackle for white steenbras, leervis (garrick) and grunter. Best on an incoming tide, working lures or live prawn.",
+    "beginnerFriendly": true,
+    "permit": "Recreational saltwater permit required. Check current local regulations on bait collection."
+  },
+  {
+    "id": "kommetjie",
+    "name": "Kommetjie — Long Beach",
+    "type": "Surf & rock",
+    "lat": -34.1428,
+    "lng": 18.3283,
+    "description": "Long sandy stretch running up toward Noordhoek, with rocky headlands at the Kom itself. Kob and shad on the beach, hottentot and galjoen from the rocks. Exposed to Atlantic swell.",
+    "beginnerFriendly": true,
+    "permit": "Recreational saltwater permit required."
+  },
+  {
+    "id": "gordons-bay",
+    "name": "Gordon's Bay Harbour Wall",
+    "type": "Harbour",
+    "lat": -34.1644,
+    "lng": 18.8594,
+    "description": "Sheltered harbour wall fishing at the eastern end of False Bay. Hottentot, steentjies and panga are the regulars. Good winter spot when the south-easter is blowing.",
+    "beginnerFriendly": true,
+    "permit": "Recreational saltwater permit required."
+  }
+]

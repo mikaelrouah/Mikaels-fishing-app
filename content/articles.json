@@ -1,0 +1,47 @@
+[
+  {
+    "id": "recreational-permit",
+    "title": "Recreational Fishing Permits — South Africa",
+    "source": "Department of Forestry, Fisheries & the Environment",
+    "sourceHost": "dffe.gov.za",
+    "url": "https://www.dffe.gov.za/fisheries/recreational-fishing",
+    "summary": "What permits you need to fish recreationally in South Africa, where to get them, and the species limits that apply.",
+    "readMinutes": 6
+  },
+  {
+    "id": "species-id-western-cape",
+    "title": "Common Shore Species of the Western Cape",
+    "source": "South African Association for Marine Biological Research",
+    "sourceHost": "saambr.org.za",
+    "url": "https://saambr.org.za/",
+    "summary": "Identification guide and size-limit reference for the fish you're most likely to land from Cape shorelines.",
+    "readMinutes": 10
+  },
+  {
+    "id": "tides-and-timing",
+    "title": "Reading Tides — When to Fish the Cape Coast",
+    "source": "SA Navy Hydrographic Office",
+    "sourceHost": "sanho.co.za",
+    "url": "https://www.sanho.co.za/tides/tides.htm",
+    "summary": "Official tide tables for Cape Town and surrounding ports, plus guidance on which phase of the tide fishes best for common species.",
+    "readMinutes": 5
+  },
+  {
+    "id": "catch-and-release",
+    "title": "Catch-and-Release Best Practices",
+    "source": "ORI — Oceanographic Research Institute",
+    "sourceHost": "saambr.org.za",
+    "url": "https://saambr.org.za/ori-tagging-project/",
+    "summary": "How to handle, photograph and release fish so they actually survive — critical reading if you tag-and-release.",
+    "readMinutes": 7
+  },
+  {
+    "id": "seasonal-calendar",
+    "title": "A Seasonal Fishing Calendar for the Cape",
+    "source": "SA Fishing Magazine",
+    "sourceHost": "safishingmag.co.za",
+    "url": "https://www.safishingmag.co.za/",
+    "summary": "Month-by-month rundown of what's running where in the Western Cape — from winter snoek to summer yellowtail.",
+    "readMinutes": 8
+  }
+]
