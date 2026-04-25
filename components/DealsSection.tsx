@@ -104,7 +104,7 @@ export default function DealsSection() {
                                 </span>
                               </div>
                               <p className="mt-2 text-xs text-ink/60">{d.retailer}</p>
-                              {"priceCheckedAt" in d && d.priceCheckedAt && (
+                              {("priceCheckedAt" in d && (d as any).priceCheckedAt) && (
                                 <p className="mt-1 text-[10px] uppercase tracking-wider text-kelp">
                                   Price checked {d.priceCheckedAt}
                                 </p>
