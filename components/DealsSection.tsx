@@ -145,7 +145,7 @@ export default function DealsSection() {
                           </div>
                         </div>
                         <div className="p-4 flex flex-col flex-1">
-                          <h4 className="font-display text-base text-ocean leading-tight min-h-[2.5rem] line-clamp-2">
+                          <h4 className="font-display text-lg font-bold text-ocean-deep leading-tight min-h-[3rem] line-clamp-2">
                             {d.name}
                           </h4>
                           <p className="mt-1 text-xs text-ink/65 line-clamp-1">{d.spec}</p>
