@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Reveal from "./Reveal";
 import dealsData from "@/content/deals.json";
 
@@ -10,24 +10,39 @@ const zar = new Intl.NumberFormat("en-ZA", {
   maximumFractionDigits: 0
 });
 
-type Tier = "beginner" | "intermediate" | "pro";
+type Tier = "all" | "beginner" | "intermediate" | "pro";
 
-const tierLabel: Record<Tier, string> = {
+const tierLabel: Record<Exclude<Tier, "all">, string> = {
   beginner: "Beginner",
   intermediate: "Intermediate",
   pro: "Pro"
 };
 
-const tierClass: Record<Tier, string> = {
+const tierClass: Record<Exclude<Tier, "all">, string> = {
   beginner: "bg-kelp/15 text-kelp",
   intermediate: "bg-ocean/15 text-ocean",
   pro: "bg-coral/15 text-coral"
 };
 
+const INITIAL_VISIBLE = 6;
+
 export default function DealsSection() {
   const { categories, lastUpdated } = dealsData;
+  const [activeCategoryId, setActiveCategoryId] = useState(categories[0].id);
+  const [activeTier, setActiveTier] = useState<Tier>("all");
   const [expanded, setExpanded] = useState(false);
-  const totalItems = categories.reduce((sum, c) => sum + c.items.length, 0);
+
+  const activeCategory = useMemo(
+    () => categories.find((c) => c.id === activeCategoryId) || categories[0],
+    [activeCategoryId, categories]
+  );
+
+  const filteredItems = useMemo(() => {
+    if (activeTier === "all") return activeCategory.items;
+    return activeCategory.items.filter((item) => item.tier === activeTier);
+  }, [activeCategory, activeTier]);
+
+  const visibleItems = expanded ? filteredItems : filteredItems.slice(0, INITIAL_VISIBLE);
 
   return (
     <section id="deals" className="scroll-mt-20 py-20 md:py-28 bg-ocean/[0.035]">
@@ -38,9 +53,7 @@ export default function DealsSection() {
               <p className="eyebrow">04 — Gear</p>
               <h2 className="section-heading mt-3">Gear worth a look.</h2>
               <p className="mt-4 max-w-2xl text-ink/75">
-                {expanded
-                  ? "Hand-picked gear from South African retailers. Beginner-friendly through to pro setups, all from brands with a long track record."
-                  : "One pick from each category to get you started. Tap below to see every item across all six categories."}
+                Hand-picked gear from South African retailers. Switch categories and tiers to find the perfect setup for your experience level.
               </p>
             </div>
             <p className="text-xs text-ink/55">
@@ -49,109 +62,156 @@ export default function DealsSection() {
           </div>
         </Reveal>
 
-        <div className="mt-12 space-y-16">
-          {categories.map((cat) => {
-            const items = expanded ? cat.items : cat.items.slice(0, 1);
-            return (
-              <Reveal key={cat.id}>
-                <div>
-                  <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-ocean/15 pb-3">
-                    <h3 className="font-display text-2xl text-ocean-deep">
-                      {cat.name}
-                    </h3>
-                    <p className="text-sm text-ink/65 max-w-md">{cat.blurb}</p>
-                  </div>
+        {/* Category Tabs */}
+        <div className="mt-12 overflow-hidden rounded-2xl bg-paper border border-ocean/10 shadow-sm">
+          <div className="flex overflow-x-auto no-scrollbar border-b border-ocean/10 bg-ocean/5">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => {
+                  setActiveCategoryId(cat.id);
+                  setExpanded(false);
+                }}
+                className={`flex-none px-6 py-4 text-sm font-medium transition-colors whitespace-nowrap ${
+                  activeCategoryId === cat.id
+                    ? "bg-paper text-ocean border-b-2 border-ocean"
+                    : "text-ink/60 hover:text-ocean hover:bg-ocean/5"
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
 
-                  <ul className="mt-6 flex gap-4 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 md:overflow-visible">
-                    {items.map((d, i) => {
-                      const discount = Math.round(
-                        ((d.originalPrice - d.salePrice) / d.originalPrice) * 100
-                      );
-                      const tier = d.tier as Tier;
-                      return (
-                        <Reveal key={d.id} as="li" delay={i * 50}>
-                          <article className="card h-full min-w-[78vw] sm:min-w-[340px] md:min-w-0 snap-start flex flex-col overflow-hidden">
-                            <div className="relative aspect-[4/3] bg-gradient-to-br from-ocean/5 to-kelp/10 grid place-items-center">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={d.image}
-                                alt={d.name}
-                                loading="lazy"
-                                className="max-h-[70%] max-w-[80%] object-contain"
-                              />
-                              {discount > 0 && (
-                                <span className="absolute top-3 left-3 rounded-full bg-coral px-2.5 py-1 text-[10px] font-semibold tracking-wider text-paper uppercase">
-                                  -{discount}%
-                                </span>
-                              )}
-                              <span
-                                className={`absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase ${tierClass[tier]}`}
-                              >
-                                {tierLabel[tier]}
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+              <div>
+                <h3 className="font-display text-2xl text-ocean-deep">
+                  {activeCategory.name}
+                </h3>
+                <p className="text-sm text-ink/65 mt-1">{activeCategory.blurb}</p>
+              </div>
+
+              {/* Tier Filters */}
+              <div className="flex flex-wrap gap-2">
+                {(["all", "beginner", "intermediate", "pro"] as Tier[]).map((tier) => (
+                  <button
+                    key={tier}
+                    onClick={() => {
+                      setActiveTier(tier);
+                      setExpanded(false);
+                    }}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all border ${
+                      activeTier === tier
+                        ? "bg-ocean text-paper border-ocean"
+                        : "bg-paper text-ink/60 border-ocean/20 hover:border-ocean/40"
+                    }`}
+                  >
+                    {tier === "all" ? "All Tiers" : tierLabel[tier]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {filteredItems.length > 0 ? (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {visibleItems.map((d, i) => {
+                  const discount = Math.round(
+                    ((d.originalPrice - d.salePrice) / d.originalPrice) * 100
+                  );
+                  const tier = d.tier as Exclude<Tier, "all">;
+                  return (
+                    <Reveal key={d.id} delay={i * 50}>
+                      <article className="card h-full flex flex-col overflow-hidden border border-ocean/5 hover:border-ocean/20 transition-all hover:shadow-md">
+                        <div className="relative aspect-[4/3] bg-gradient-to-br from-ocean/5 to-kelp/5 grid place-items-center p-4">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={d.image}
+                            alt={d.name}
+                            loading="lazy"
+                            className="h-full w-full object-contain"
+                          />
+                          {discount > 0 && (
+                            <span className="absolute top-3 left-3 rounded-full bg-coral px-2.5 py-1 text-[10px] font-semibold tracking-wider text-paper uppercase">
+                              -{discount}%
+                            </span>
+                          )}
+                          <span
+                            className={`absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase ${tierClass[tier]}`}
+                          >
+                            {tierLabel[tier]}
+                          </span>
+                        </div>
+                        <div className="p-4 flex flex-col flex-1">
+                          <h4 className="font-display text-base text-ocean leading-snug min-h-[2.5rem] line-clamp-2">
+                            {d.name}
+                          </h4>
+                          <p className="mt-1 text-xs text-ink/65 line-clamp-1">{d.spec}</p>
+                          <div className="mt-auto pt-4">
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-coral text-lg font-semibold">
+                                {zar.format(d.salePrice)}
+                              </span>
+                              <span className="text-xs text-ink/50 line-through">
+                                {zar.format(d.originalPrice)}
                               </span>
                             </div>
-                            <div className="p-4 flex flex-col flex-1">
-                              <h4 className="font-display text-base text-ocean leading-snug">
-                                {d.name}
-                              </h4>
-                              <p className="mt-1 text-xs text-ink/65">{d.spec}</p>
-                              <div className="mt-3 flex items-baseline gap-2">
-                                <span className="text-coral text-lg font-semibold">
-                                  {zar.format(d.salePrice)}
-                                </span>
-                                <span className="text-xs text-ink/50 line-through">
-                                  {zar.format(d.originalPrice)}
-                                </span>
-                              </div>
-                              <p className="mt-2 text-xs text-ink/60">{d.retailer}</p>
+                            <div className="mt-2 flex items-center justify-between">
+                              <p className="text-[10px] uppercase tracking-wider text-ink/50 font-medium">
+                                {d.retailer}
+                              </p>
                               {("priceCheckedAt" in d && (d as any).priceCheckedAt) && (
-                                <p className="mt-1 text-[10px] uppercase tracking-wider text-kelp">
-                                  Price checked {(d as any).priceCheckedAt}
+                                <p className="text-[9px] uppercase tracking-tight text-kelp/70">
+                                  Checked {(d as any).priceCheckedAt}
                                 </p>
                               )}
-                              <a
-                                href={`/out?to=${encodeURIComponent(d.url)}&id=${encodeURIComponent(d.id)}`}
-                                target="_blank"
-                                rel="noopener noreferrer nofollow"
-                                className="btn-coral mt-4 self-start text-xs"
-                              >
-                                View at {d.retailer}
-                              </a>
                             </div>
-                          </article>
-                        </Reveal>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
+                            <a
+                              href={`/out?to=${encodeURIComponent(d.url)}&id=${encodeURIComponent(d.id)}`}
+                              target="_blank"
+                              rel="noopener noreferrer nofollow"
+                              className="btn-coral mt-4 w-full text-center text-xs py-2.5"
+                            >
+                              View at {d.retailer}
+                            </a>
+                          </div>
+                        </div>
+                      </article>
+                    </Reveal>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className="py-20 text-center">
+                <p className="text-ink/50 italic">No items found in this tier for {activeCategory.name}.</p>
+              </div>
+            )}
 
-        <div className="mt-12 flex justify-center">
-          <button
-            type="button"
-            onClick={() => setExpanded((v) => !v)}
-            className="btn-ghost text-sm"
-            aria-expanded={expanded}
-          >
-            {expanded
-              ? "Show one per category"
-              : `See all ${totalItems} items across ${categories.length} categories`}
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className={`ml-1 inline-block transition-transform ${expanded ? "rotate-180" : ""}`}
-              aria-hidden
-            >
-              <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+            {filteredItems.length > INITIAL_VISIBLE && (
+              <div className="mt-12 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setExpanded((v) => !v)}
+                  className="btn-ghost text-sm"
+                  aria-expanded={expanded}
+                >
+                  {expanded ? "Show less" : `See all ${filteredItems.length} items`}
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className={`ml-1 inline-block transition-transform ${expanded ? "rotate-180" : ""}`}
+                    aria-hidden
+                  >
+                    <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>
