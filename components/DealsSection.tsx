@@ -123,27 +123,29 @@ export default function DealsSection() {
                   return (
                     <Reveal key={d.id} delay={i * 50}>
                       <article className="card h-full flex flex-col overflow-hidden border border-ocean/5 hover:border-ocean/20 transition-all hover:shadow-md">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-ocean/5 to-kelp/5 grid place-items-center p-4">
+                        <div className="relative aspect-[4/3] bg-gradient-to-br from-ocean/5 to-kelp/5 grid place-items-center p-6">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={d.image}
                             alt={d.name}
                             loading="lazy"
-                            className="h-full w-full object-contain"
+                            className="h-full w-full object-contain drop-shadow-sm"
                           />
-                          {discount > 0 && (
-                            <span className="absolute top-3 left-3 rounded-full bg-coral px-2.5 py-1 text-[10px] font-semibold tracking-wider text-paper uppercase">
-                              -{discount}%
+                          <div className="absolute top-0 left-0 right-0 p-3 flex justify-between items-start pointer-events-none">
+                            {discount > 0 ? (
+                              <span className="rounded-full bg-coral px-2.5 py-1 text-[10px] font-bold tracking-wider text-paper uppercase shadow-sm">
+                                -{discount}%
+                              </span>
+                            ) : <div />}
+                            <span
+                              className={`rounded-full px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase shadow-sm ${tierClass[tier]}`}
+                            >
+                              {tierLabel[tier]}
                             </span>
-                          )}
-                          <span
-                            className={`absolute top-3 right-3 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase ${tierClass[tier]}`}
-                          >
-                            {tierLabel[tier]}
-                          </span>
+                          </div>
                         </div>
                         <div className="p-4 flex flex-col flex-1">
-                          <h4 className="font-display text-base text-ocean leading-snug min-h-[2.5rem] line-clamp-2">
+                          <h4 className="font-display text-base text-ocean leading-tight min-h-[2.5rem] line-clamp-2">
                             {d.name}
                           </h4>
                           <p className="mt-1 text-xs text-ink/65 line-clamp-1">{d.spec}</p>
