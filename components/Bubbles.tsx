@@ -3,31 +3,39 @@
 import { useEffect, useState } from "react";
 
 export default function Bubbles() {
-  const [bubbles, setBubbles] = useState<{ id: number; left: number; size: number; duration: number; delay: number }[]>([]);
+  const [items, setItems] = useState<{ id: number; left: number; size: number; duration: number; delay: number; type: 'bubble' | 'plankton' }[]>([]);
 
   useEffect(() => {
-    const b = Array.from({ length: 25 }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      size: Math.random() * 15 + 5,
-      duration: Math.random() * 5 + 5,
-      delay: Math.random() * 10
-    }));
-    setBubbles(b);
+    const b = Array.from({ length: 40 }).map((_, i) => {
+      const type = i % 2 === 0 ? 'bubble' : 'plankton';
+      return {
+        id: i,
+        left: Math.random() * 100,
+        size: type === 'bubble' ? Math.random() * 15 + 5 : Math.random() * 3 + 1,
+        duration: Math.random() * 10 + 10,
+        delay: Math.random() * 20,
+        type: type as 'bubble' | 'plankton'
+      };
+    });
+    setItems(b);
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-      {bubbles.map((bubble) => (
+      {items.map((item) => (
         <div
-          key={bubble.id}
-          className="absolute bottom-[-20px] rounded-full bg-white/10 border border-white/20 animate-bubble"
+          key={item.id}
+          className={`absolute bottom-[-20px] rounded-full animate-bubble ${
+            item.type === 'bubble' 
+              ? 'bg-white/10 border border-white/20' 
+              : 'bg-cyan-200/40 shadow-[0_0_8px_rgba(200,255,255,0.6)]'
+          }`}
           style={{
-            left: `${bubble.left}%`,
-            width: `${bubble.size}px`,
-            height: `${bubble.size}px`,
-            animationDuration: `${bubble.duration}s`,
-            animationDelay: `${bubble.delay}s`,
+            left: `${item.left}%`,
+            width: `${item.size}px`,
+            height: `${item.size}px`,
+            animationDuration: `${item.duration}s`,
+            animationDelay: `${item.delay}s`,
           }}
         />
       ))}

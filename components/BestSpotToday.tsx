@@ -59,23 +59,23 @@ function fishingAdvice(c: Conditions, moonIllum: number): string {
 function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div>
-      <p className="text-[10px] uppercase tracking-wider text-ink/55">{label}</p>
-      <p className="font-display text-xl text-ocean mt-0.5 leading-tight">{value}</p>
-      {sub && <p className="text-[11px] text-ink/60 mt-0.5">{sub}</p>}
+      <p className="text-[10px] uppercase tracking-wider text-blue-200/50">{label}</p>
+      <p className="font-display text-xl text-white mt-0.5 leading-tight">{value}</p>
+      {sub && <p className="text-[11px] text-blue-100/40 mt-0.5">{sub}</p>}
     </div>
   );
 }
 
 function Skeleton() {
   return (
-    <div className="card p-6 md:p-8 bg-paper animate-pulse">
-      <div className="h-4 w-32 bg-ocean/10 rounded" />
-      <div className="h-8 w-2/3 bg-ocean/15 rounded mt-3" />
+    <div className="card animate-pulse bg-white/5 border-white/10">
+      <div className="h-4 w-32 bg-white/10 rounded" />
+      <div className="h-8 w-2/3 bg-white/15 rounded mt-3" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
         {[0, 1, 2, 3].map((i) => (
           <div key={i}>
-            <div className="h-3 w-12 bg-ocean/10 rounded" />
-            <div className="h-6 w-20 bg-ocean/15 rounded mt-2" />
+            <div className="h-3 w-12 bg-white/10 rounded" />
+            <div className="h-6 w-20 bg-white/15 rounded mt-2" />
           </div>
         ))}
       </div>
@@ -106,82 +106,87 @@ export default function BestSpotToday() {
 
   return (
     <Reveal>
-      <article className="card p-6 md:p-8 bg-gradient-to-br from-ocean/[0.04] via-paper to-kelp/[0.05] border border-ocean/15">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p className="eyebrow text-coral">Best spot today · live</p>
-            <h3 className="font-display text-2xl md:text-3xl text-ocean-deep mt-2">{best.name}</h3>
-            <p className="text-sm text-ink/65 mt-1">
-              {best.type}
-              {best.freshwater ? " · Freshwater" : " · Saltwater"}
-            </p>
-          </div>
-          <div className="text-right">
-            <p className="text-[10px] uppercase tracking-wider text-ink/55">Moon tonight</p>
-            <p className="font-display text-lg text-ocean mt-0.5">{moon.name}</p>
-            <p className="text-xs text-ink/65">{moon.illuminationPct}% illuminated</p>
-          </div>
-        </div>
-
-        <dl className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Stat
-            label="Wind"
-            value={best.windKmh != null ? `${Math.round(best.windKmh)} km/h` : "—"}
-            sub={`${windDirLabel(best.windDir)}${best.windGustKmh != null ? ` · gust ${Math.round(best.windGustKmh)}` : ""}`}
-          />
-          <Stat
-            label={best.freshwater ? "Conditions" : "Wave height"}
-            value={best.freshwater ? best.weather : best.waveHeightM != null ? `${best.waveHeightM.toFixed(1)} m` : "—"}
-            sub={best.freshwater ? `${best.cloudPct ?? 0}% cloud` : best.wavePeriodS != null ? `${Math.round(best.wavePeriodS)} s period` : ""}
-          />
-          <Stat
-            label="Air temp"
-            value={best.tempC != null ? `${Math.round(best.tempC)}°C` : "—"}
-            sub={best.weather}
-          />
-          <Stat
-            label="Daylight"
-            value={`${fmtTime(best.sunrise)} – ${fmtTime(best.sunset)}`}
-            sub="Sunrise – Sunset"
-          />
-        </dl>
-
-        <div className="mt-6 rounded-xl bg-paper/70 p-4 border border-ocean/10">
-          <p className="text-sm text-ink/85">
-            <strong className="text-ocean">Why this pick:</strong>{" "}
-            {fishingAdvice(best, moon.illuminationPct)}
-          </p>
-          {best.reasons.length > 0 && (
-            <p className="text-xs text-ink/60 mt-2">{best.reasons.join(" · ")}</p>
-          )}
-        </div>
-
-        {data.runnersUp.length > 0 && (
-          <div className="mt-5">
-            <p className="text-[11px] uppercase tracking-wider text-ink/55 mb-2">Also fishable today</p>
-            <div className="flex flex-wrap gap-2">
-              {data.runnersUp.map((r) => (
-                <span
-                  key={r.id}
-                  className="inline-flex items-center gap-2 rounded-full bg-ocean/8 px-3 py-1.5 text-xs text-ocean"
-                >
-                  {r.name}
-                  <span className="text-ink/55">
-                    {r.windKmh != null ? `${Math.round(r.windKmh)} km/h` : ""}
-                    {!r.freshwater && r.waveHeightM != null ? ` · ${r.waveHeightM.toFixed(1)} m` : ""}
-                  </span>
-                </span>
-              ))}
+      <article className="card relative overflow-hidden group">
+        {/* Subtle internal glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
+        
+        <div className="relative z-10">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <p className="eyebrow text-cyan-400">Best spot today · live</p>
+              <h3 className="font-display text-2xl md:text-4xl text-white mt-2 drop-shadow-sm">{best.name}</h3>
+              <p className="text-sm text-blue-100/60 mt-1">
+                {best.type}
+                {best.freshwater ? " · Freshwater" : " · Saltwater"}
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-[10px] uppercase tracking-wider text-blue-200/50">Moon tonight</p>
+              <p className="font-display text-lg text-cyan-100 mt-0.5">{moon.name}</p>
+              <p className="text-xs text-blue-100/40">{moon.illuminationPct}% illuminated</p>
             </div>
           </div>
-        )}
 
-        <p className="text-[10px] text-ink/45 mt-5 leading-relaxed">
-          Live data via <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" className="underline">open-meteo.com</a>
-          {" "}(ECMWF + NOAA models, refreshed every 4 hours). For exact tide times consult the{" "}
-          <a href="https://www.sanho.co.za" target="_blank" rel="noopener noreferrer" className="underline">SA Navy Hydrographic Office tide tables</a>.
-          {" "}Last refreshed {fetched.toLocaleString("en-ZA", { timeZone: "Africa/Johannesburg" })}.
-        </p>
+          <dl className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <Stat
+              label="Wind"
+              value={best.windKmh != null ? `${Math.round(best.windKmh)} km/h` : "—"}
+              sub={`${windDirLabel(best.windDir)}${best.windGustKmh != null ? ` · gust ${Math.round(best.windGustKmh)}` : ""}`}
+            />
+            <Stat
+              label={best.freshwater ? "Conditions" : "Wave height"}
+              value={best.freshwater ? best.weather : best.waveHeightM != null ? `${best.waveHeightM.toFixed(1)} m` : "—"}
+              sub={best.freshwater ? `${best.cloudPct ?? 0}% cloud` : best.wavePeriodS != null ? `${Math.round(best.wavePeriodS)} s period` : ""}
+            />
+            <Stat
+              label="Air temp"
+              value={best.tempC != null ? `${Math.round(best.tempC)}°C` : "—"}
+              sub={best.weather}
+            />
+            <Stat
+              label="Daylight"
+              value={`${fmtTime(best.sunrise)} – ${fmtTime(best.sunset)}`}
+              sub="Sunrise – Sunset"
+            />
+          </dl>
+
+          <div className="mt-8 rounded-2xl bg-white/5 p-5 border border-white/5">
+            <p className="text-sm text-blue-50/90 leading-relaxed">
+              <strong className="text-cyan-400 font-semibold">Why this pick:</strong>{" "}
+              {fishingAdvice(best, moon.illuminationPct)}
+            </p>
+            {best.reasons.length > 0 && (
+              <p className="text-[11px] text-blue-100/40 mt-3 font-medium tracking-wide uppercase">{best.reasons.join(" · ")}</p>
+            )}
+          </div>
+
+          {data.runnersUp.length > 0 && (
+            <div className="mt-8">
+              <p className="text-[10px] uppercase tracking-widest text-blue-200/40 mb-3 font-bold">Also fishable today</p>
+              <div className="flex flex-wrap gap-2">
+                {data.runnersUp.map((r) => (
+                  <span
+                    key={r.id}
+                    className="inline-flex items-center gap-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 px-4 py-2 text-xs text-cyan-100"
+                  >
+                    {r.name}
+                    <span className="text-blue-100/30 font-bold">
+                      {r.windKmh != null ? `${Math.round(r.windKmh)} km/h` : ""}
+                      {!r.freshwater && r.waveHeightM != null ? ` · ${r.waveHeightM.toFixed(1)} m` : ""}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <p className="text-[10px] text-blue-100/30 mt-8 pt-6 border-t border-white/5 leading-relaxed">
+            Live data via <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-cyan-400 transition-colors">open-meteo.com</a>
+            {" "}(ECMWF + NOAA models). Consulting the{" "}
+            <a href="https://www.sanho.co.za" target="_blank" rel="noopener noreferrer" className="underline hover:text-cyan-400 transition-colors">SA Navy Hydrographic Office tide tables</a> is recommended.
+            {" "}Last refreshed {fetched.toLocaleString("en-ZA", { timeZone: "Africa/Johannesburg" })}.
+          </p>
+        </div>
       </article>
     </Reveal>
   );

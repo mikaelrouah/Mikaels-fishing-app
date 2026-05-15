@@ -3,6 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import FishCursor from "@/components/FishCursor";
 import Bubbles from "@/components/Bubbles";
+import Jellyfish from "@/components/Jellyfish";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body className="font-sans">
         <FishCursor />
         <Bubbles />
+        <Jellyfish />
         {children}
       </body>
     </html>

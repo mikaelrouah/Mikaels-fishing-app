@@ -32,92 +32,95 @@ function SpotCard({ s, idx }: { s: Spot; idx: number }) {
   const closeUpEmbed = `https://maps.google.com/maps?q=${s.lat},${s.lng}&t=k&z=16&output=embed`;
   const satelliteLink = `https://www.google.com/maps/@${s.lat},${s.lng},17z/data=!3m1!1e3`;
   const accentClass = s.freshwater
-    ? "bg-kelp/15 text-kelp"
-    : "bg-ocean/15 text-ocean";
+    ? "bg-emerald-400/10 text-emerald-400 border-emerald-400/20"
+    : "bg-cyan-400/10 text-cyan-400 border-cyan-400/20";
   return (
     <Reveal delay={(idx % PREVIEW_COUNT) * 40} as="li">
-      <article className="card p-5 h-full flex flex-col">
-        <div className="flex items-baseline justify-between gap-3">
-          <h3 className="font-display text-xl text-ocean">{s.name}</h3>
-          <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full ${accentClass}`}>
-            {s.freshwater ? "Freshwater" : s.type}
-          </span>
-        </div>
-        {s.freshwater && (
-          <p className="text-xs text-kelp/80 mt-1 italic">{s.type}</p>
-        )}
-        <p className="mt-3 text-sm text-ink/80">{s.description}</p>
-
-        {s.microSpots && s.microSpots.length > 0 && (
-          <div className="mt-4 rounded-lg bg-paper border border-ocean/10 p-3">
-            <p className="text-[10px] uppercase tracking-wider text-coral font-semibold mb-2">
-              Best spots within
-            </p>
-            <ul className="space-y-1.5 text-xs text-ink/80">
-              {s.microSpots.map((m, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="text-coral mt-0.5 shrink-0">•</span>
-                  <span>{m}</span>
-                </li>
-              ))}
-            </ul>
+      <article className="card p-6 h-full flex flex-col relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+        <div className="relative z-10">
+          <div className="flex items-baseline justify-between gap-3">
+            <h3 className="font-display text-xl text-white group-hover:text-cyan-400 transition-colors">{s.name}</h3>
+            <span className={`text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border ${accentClass}`}>
+              {s.freshwater ? "Freshwater" : s.type}
+            </span>
           </div>
-        )}
+          {s.freshwater && (
+            <p className="text-[10px] text-emerald-400/60 mt-1 uppercase tracking-widest font-bold">{s.type}</p>
+          )}
+          <p className="mt-4 text-sm text-blue-100/60 leading-relaxed">{s.description}</p>
 
-        <dl className="mt-4 text-xs text-ink/70 space-y-1">
-          <div className="flex gap-2">
-            <dt className="font-medium text-ocean/80">Skill level:</dt>
-            <dd>{s.beginnerFriendly ? "Beginner-friendly" : "Experienced anglers"}</dd>
-          </div>
-          <div className="flex gap-2">
-            <dt className="font-medium text-ocean/80">Permit:</dt>
-            <dd>{s.permit}</dd>
-          </div>
-        </dl>
+          {s.microSpots && s.microSpots.length > 0 && (
+            <div className="mt-5 rounded-2xl bg-white/5 border border-white/5 p-4">
+              <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold mb-3">
+                Best spots within
+              </p>
+              <ul className="space-y-2 text-xs text-blue-100/70">
+                {s.microSpots.map((m, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-cyan-400 mt-0.5 shrink-0">•</span>
+                    <span>{m}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        {showCloseUp && (
-          <div className="mt-4 overflow-hidden rounded-lg border border-ocean/10">
-            <iframe
-              title={`${s.name} satellite close-up`}
-              src={closeUpEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="block w-full h-[260px]"
-            />
-          </div>
-        )}
+          <dl className="mt-5 text-xs text-blue-100/40 space-y-1.5 font-medium">
+            <div className="flex gap-2">
+              <dt className="text-blue-100/30 uppercase tracking-widest text-[10px] font-bold">Skill level:</dt>
+              <dd>{s.beginnerFriendly ? "Beginner-friendly" : "Experienced anglers"}</dd>
+            </div>
+            <div className="flex gap-2">
+              <dt className="text-blue-100/30 uppercase tracking-widest text-[10px] font-bold">Permit:</dt>
+              <dd className="line-clamp-1">{s.permit}</dd>
+            </div>
+          </dl>
 
-        <div className="mt-auto pt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-          <button
-            type="button"
-            onClick={() => setShowCloseUp((v) => !v)}
-            className="text-sm font-medium text-ocean hover:text-ocean-deep inline-flex items-center gap-1"
-            aria-expanded={showCloseUp}
-          >
-            {showCloseUp ? "Hide close-up" : "Close-up satellite"}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${showCloseUp ? "rotate-180" : ""}`} aria-hidden>
-              <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <a
-            href={satelliteLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-ink/60 hover:text-ocean underline-offset-2 hover:underline"
-          >
-            Open in Maps
-          </a>
-          <a
-            href={directions}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-auto text-sm font-medium text-coral hover:text-coral-soft inline-flex items-center gap-1"
-          >
-            Directions
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
+          {showCloseUp && (
+            <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+              <iframe
+                title={`${s.name} satellite close-up`}
+                src={closeUpEmbed}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block w-full h-[260px] opacity-80"
+              />
+            </div>
+          )}
+
+          <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <button
+              type="button"
+              onClick={() => setShowCloseUp((v) => !v)}
+              className="text-xs font-bold uppercase tracking-widest text-cyan-400 hover:text-white inline-flex items-center gap-1.5 transition-colors"
+              aria-expanded={showCloseUp}
+            >
+              {showCloseUp ? "Hide close-up" : "Satellite view"}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className={`transition-transform ${showCloseUp ? "rotate-180" : ""}`} aria-hidden>
+                <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <a
+              href={satelliteLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] font-bold uppercase tracking-widest text-blue-100/30 hover:text-cyan-400 transition-colors"
+            >
+              Google Maps
+            </a>
+            <a
+              href={directions}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto text-xs font-bold uppercase tracking-widest text-white hover:text-cyan-400 inline-flex items-center gap-1.5 transition-colors"
+            >
+              Directions
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
+                <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
         </div>
       </article>
     </Reveal>
@@ -129,16 +132,16 @@ export default function SpotsSection() {
   const saltCount = all.filter((s) => !s.freshwater).length;
   const freshCount = all.filter((s) => s.freshwater).length;
   return (
-    <section id="spots" className="scroll-mt-20 py-20 md:py-28 bg-ocean/[0.035]">
+    <section id="spots" className="scroll-mt-20 py-24 md:py-36 bg-navy-mid/30 ocean-floor">
       <div className="container-narrow">
         <Reveal>
           <p className="eyebrow">02 — On the water</p>
           <h2 className="section-heading mt-3">
             Spots worth the drive.
           </h2>
-          <p className="mt-4 max-w-2xl text-ink/75">
+          <p className="mt-4 max-w-2xl text-blue-100/70">
             A curated map of {saltCount} shore, rock, harbour and estuary marks plus {freshCount} freshwater dams and rivers
-            around the Cape, the West Coast, the Overberg and the Garden Route. Each card lists the best spots within that area, and you can open a satellite close-up before you drive.
+            around the Cape. Each card lists the best spots within that area, and you can open a satellite close-up before you drive.
           </p>
         </Reveal>
 

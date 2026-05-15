@@ -17,24 +17,40 @@ const SPOTS = spotsData as Spot[];
 const FOUR_HOURS = 14400;
 
 async function fetchWeather(lat: number, lng: number) {
-  const url =
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}` +
-    `&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover` +
-    `&daily=sunrise,sunset` +
-    `&timezone=Africa/Johannesburg`;
-  const r = await fetch(url, { next: { revalidate: FOUR_HOURS } });
-  if (!r.ok) throw new Error("weather " + r.status);
-  return r.json();
+  try {
+    const url =
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}` +
+      `&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover` +
+      `&daily=sunrise,sunset` +
+      `&timezone=Africa/Johannesburg`;
+    const r = await fetch(url, { next: { revalidate: FOUR_HOURS } });
+    if (!r.ok) {
+      console.error(`Weather API error: ${r.status}`);
+      return null;
+    }
+    return r.json();
+  } catch (error) {
+    console.error("fetchWeather error:", error);
+    return null;
+  }
 }
 
 async function fetchMarine(lat: number, lng: number) {
-  const url =
-    `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}` +
-    `&current=wave_height,wave_period,wave_direction,wind_wave_height,swell_wave_height,swell_wave_period` +
-    `&timezone=Africa/Johannesburg`;
-  const r = await fetch(url, { next: { revalidate: FOUR_HOURS } });
-  if (!r.ok) return null;
-  return r.json();
+  try {
+    const url =
+      `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}` +
+      `&current=wave_height,wave_period,wave_direction,wind_wave_height,swell_wave_height,swell_wave_period` +
+      `&timezone=Africa/Johannesburg`;
+    const r = await fetch(url, { next: { revalidate: FOUR_HOURS } });
+    if (!r.ok) {
+      console.error(`Marine API error: ${r.status}`);
+      return null;
+    }
+    return r.json();
+  } catch (error) {
+    console.error("fetchMarine error:", error);
+    return null;
+  }
 }
 
 function weatherSummary(code: number | null | undefined): string {
