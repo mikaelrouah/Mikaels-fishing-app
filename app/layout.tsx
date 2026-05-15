@@ -37,7 +37,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body className="font-sans">
-        <FishCursor />
         <Bubbles />
         <Jellyfish />
         {children}
