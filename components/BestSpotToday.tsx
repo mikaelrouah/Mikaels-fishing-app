@@ -106,28 +106,28 @@ export default function BestSpotToday() {
 
   return (
     <Reveal>
-      <article className="card relative overflow-hidden group">
+      <article className="card relative overflow-hidden group w-full">
         {/* Subtle internal glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent pointer-events-none" />
         
-        <div className="relative z-10">
+        <div className="relative z-10 p-5 md:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
+            <div className="min-w-0 flex-1">
               <p className="eyebrow text-cyan-400">Best spot today · live</p>
-              <h3 className="font-display text-2xl md:text-4xl text-white mt-2 drop-shadow-sm">{best.name}</h3>
-              <p className="text-sm text-blue-100/60 mt-1">
+              <h3 className="font-display text-2xl md:text-4xl text-white mt-2 drop-shadow-sm truncate">{best.name}</h3>
+              <p className="text-sm text-blue-100/60 mt-1 truncate">
                 {best.type}
                 {best.freshwater ? " · Freshwater" : " · Saltwater"}
               </p>
             </div>
-            <div className="text-right">
+            <div className="text-right shrink-0">
               <p className="text-[10px] uppercase tracking-wider text-blue-200/50">Moon tonight</p>
               <p className="font-display text-lg text-cyan-100 mt-0.5">{moon.name}</p>
               <p className="text-xs text-blue-100/40">{moon.illuminationPct}% illuminated</p>
             </div>
           </div>
 
-          <dl className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <dl className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             <Stat
               label="Wind"
               value={best.windKmh != null ? `${Math.round(best.windKmh)} km/h` : "—"}
@@ -150,13 +150,13 @@ export default function BestSpotToday() {
             />
           </dl>
 
-          <div className="mt-8 rounded-2xl bg-white/5 p-5 border border-white/5">
+          <div className="mt-8 rounded-2xl bg-white/5 p-4 md:p-5 border border-white/5">
             <p className="text-sm text-blue-50/90 leading-relaxed">
               <strong className="text-cyan-400 font-semibold">Why this pick:</strong>{" "}
               {fishingAdvice(best, moon.illuminationPct)}
             </p>
             {best.reasons.length > 0 && (
-              <p className="text-[11px] text-blue-100/40 mt-3 font-medium tracking-wide uppercase">{best.reasons.join(" · ")}</p>
+              <p className="text-[10px] md:text-[11px] text-blue-100/40 mt-3 font-medium tracking-wide uppercase">{best.reasons.join(" · ")}</p>
             )}
           </div>
 
@@ -167,7 +167,7 @@ export default function BestSpotToday() {
                 {data.runnersUp.map((r) => (
                   <span
                     key={r.id}
-                    className="inline-flex items-center gap-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 px-4 py-2 text-xs text-cyan-100"
+                    className="inline-flex items-center gap-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 px-3 py-1.5 md:px-4 md:py-2 text-[11px] md:text-xs text-cyan-100"
                   >
                     {r.name}
                     <span className="text-blue-100/30 font-bold">

@@ -11,7 +11,7 @@ export default function FishCursor() {
   const fishRef = useRef<HTMLDivElement>(null);
   
   const mouse = useRef({ x: 0, y: 0 });
-  const pos = useRef({ x: 0, y: 0, angle: 0, flip: 1 });
+  const pos = useRef({ x: 0, y: 0, angle: 0, currentAngle: 0, flip: 1 });
 
   useEffect(() => {
     setIsHome(pathname === "/");
@@ -25,17 +25,23 @@ export default function FishCursor() {
       mouse.current = { x: e.clientX, y: e.clientY };
     };
 
-    const handleExit = () => {
+    const handleExit = (e: MouseEvent | Event) => {
       if (!visible || burst) return;
-      setBurst(true);
-      setTimeout(() => {
-        setVisible(false);
-        setBurst(false);
-      }, 600);
+      
+      // Target specific sections or links
+      const target = e.target as HTMLElement;
+      const isInteraction = target.closest('a, button, [role="button"], #knots, #spots, #reading');
+      
+      if (isInteraction) {
+        setBurst(true);
+        setTimeout(() => {
+          setVisible(false);
+          setBurst(false);
+        }, 600);
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    // Disappear on clicks or any scroll (indicates interaction)
     window.addEventListener("mousedown", handleExit);
     window.addEventListener("scroll", handleExit, { passive: true });
 
@@ -46,14 +52,13 @@ export default function FishCursor() {
         return;
       }
 
-      // Chase logic with offset - stay slightly behind and to the side
+      // Chase logic: stay slightly behind
       const lerp = 0.05;
-      const offsetDist = 40; 
+      const offsetDist = 30; 
       const dx_mouse = mouse.current.x - pos.current.x;
       const dy_mouse = mouse.current.y - pos.current.y;
       const dist = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
       
-      // Only move if mouse is a bit away to create that "next to" feel
       if (dist > offsetDist) {
         const targetX = mouse.current.x - (dx_mouse / dist) * offsetDist;
         const targetY = mouse.current.y - (dy_mouse / dist) * offsetDist;
@@ -62,12 +67,20 @@ export default function FishCursor() {
         pos.current.y += (targetY - pos.current.y) * lerp;
       }
 
-      const angle = Math.atan2(dy_mouse, dx_mouse) * (180 / Math.PI);
-      // Flip logic with a smoother transition feel
+      // Target angle based on movement
+      const targetAngle = Math.atan2(dy_mouse, dx_mouse) * (180 / Math.PI);
+      
+      // Smooth turning (interpolate angle)
+      let angleDiff = targetAngle - pos.current.currentAngle;
+      while (angleDiff < -180) angleDiff += 360;
+      while (angleDiff > 180) angleDiff -= 360;
+      pos.current.currentAngle += angleDiff * 0.1;
+
+      // Flip logic
       const newFlip = dx_mouse < 0 ? -1 : 1;
       pos.current.flip = newFlip;
       
-      const displayAngle = pos.current.flip === -1 ? angle + 180 : angle;
+      const displayAngle = pos.current.flip === -1 ? pos.current.currentAngle + 180 : pos.current.currentAngle;
       
       fishRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) scaleX(${pos.current.flip}) rotate(${displayAngle}deg)`;
 
@@ -88,62 +101,58 @@ export default function FishCursor() {
   return (
     <div
       ref={fishRef}
-      className={`fixed top-0 left-0 pointer-events-none z-[9999] -ml-12 -mt-6 transition-opacity duration-500 ${burst ? "animate-fish-burst opacity-0" : "opacity-100"}`}
+      className={`fixed top-0 left-0 pointer-events-none z-[9999] -ml-8 -mt-4 transition-opacity duration-500 ${burst ? "animate-fish-burst opacity-0" : "opacity-100"}`}
       style={{ 
-        // Use a filter to give it a painted look
-        filter: "url(#paint-texture) drop-shadow(0 4px 12px rgba(0,0,0,0.4))",
-        transition: "transform 0.1s ease-out, opacity 0.5s ease-in-out"
+        filter: "url(#paint-texture) drop-shadow(0 4px 8px rgba(0,0,0,0.3))",
       }}
     >
-      <svg width="120" height="60" viewBox="0 0 100 50" fill="none">
+      {/* Smaller size (80x40 instead of 120x60) */}
+      <svg width="80" height="40" viewBox="0 0 100 50" fill="none">
         <defs>
-          {/* Painting texture filter */}
           <filter id="paint-texture">
             <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
           </filter>
 
-          <linearGradient id="goldfishGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#ff7b00" />
-            <stop offset="50%" stopColor="#ffb700" />
-            <stop offset="100%" stopColor="#ff9500" />
+          <linearGradient id="koiBody" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="100%" stopColor="#f0f0f0" />
           </linearGradient>
         </defs>
 
-        {/* Tail - Improved wiggle */}
+        {/* Tail */}
         <path 
-          d="M20 25 L5 5 Q15 25 5 45 L20 25" 
-          fill="#ff7b00" 
+          d="M20 25 L5 8 Q15 25 5 42 L20 25" 
+          fill="#ffffff" 
           className="animate-fish-tail origin-right" 
-          stroke="#e85d04"
+          stroke="#dddddd"
+          strokeWidth="0.5"
+        />
+
+        {/* Main Body (Koi) */}
+        <path 
+          d="M20 25 C20 5 45 2 80 12 C90 16 95 22 95 25 C95 28 90 34 80 38 C45 48 20 45 20 25Z" 
+          fill="url(#koiBody)" 
+          stroke="#dddddd"
           strokeWidth="1"
         />
 
-        {/* Main Body */}
-        <path 
-          d="M20 25 C20 5 45 2 80 12 C90 16 95 22 95 25 C95 28 90 34 80 38 C45 48 20 45 20 25Z" 
-          fill="url(#goldfishGrad)" 
-          stroke="#e85d04"
-          strokeWidth="1.5"
-        />
+        {/* Koi Patterns (Red/Orange patches) */}
+        <path d="M70 12 Q80 15 75 22 Q65 18 70 12Z" fill="#e63946" opacity="0.9" />
+        <path d="M40 8 Q55 10 50 20 Q35 15 40 8Z" fill="#f4a261" opacity="0.8" />
+        <path d="M25 20 Q35 25 30 35 Q20 30 25 20Z" fill="#e63946" opacity="0.8" />
         
         {/* Eye */}
-        <circle cx="85" cy="20" r="3.5" fill="white" />
-        <circle cx="86.5" cy="19" r="1.8" fill="black" />
+        <circle cx="85" cy="20" r="2.5" fill="black" />
 
         {/* Shark Fin strapped on */}
-        <path d="M45 12 L65 -5 L75 12 Z" fill="#457b9d" stroke="#1d3557" strokeWidth="1" />
-        <path d="M45 12 Q60 15 75 12" stroke="#1d3557" strokeWidth="2" fill="none" />
-        {/* Harness strap around belly */}
-        <path d="M46 12 Q50 40 73 12" stroke="#1d3557" strokeWidth="1" fill="none" opacity="0.4" />
+        <path d="M45 12 L60 0 L70 12 Z" fill="#457b9d" stroke="#1d3557" strokeWidth="1" />
+        <path d="M45 12 Q58 14 70 12" stroke="#1d3557" strokeWidth="1.5" fill="none" />
+        <path d="M46 12 Q50 35 68 12" stroke="#1d3557" strokeWidth="0.5" fill="none" opacity="0.3" />
 
-        {/* Painted detail lines */}
-        <path d="M30 25 Q50 28 75 25" stroke="#e85d04" strokeWidth="0.5" opacity="0.3" />
-        <path d="M35 15 Q55 18 70 15" stroke="#e85d04" strokeWidth="0.5" opacity="0.2" />
-        
         {/* Fins */}
-        <path d="M40 10 Q50 2 60 10" fill="#ff7b00" opacity="0.6" />
-        <path d="M50 35 Q45 45 60 40 Z" fill="#ff7b00" opacity="0.5" />
+        <path d="M40 10 Q50 4 55 10" fill="#ffffff" opacity="0.7" />
+        <path d="M50 32 Q45 42 55 38 Z" fill="#ffffff" opacity="0.6" />
       </svg>
     </div>
   );
