@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
-import FishCursor from "@/components/FishCursor";
 import Bubbles from "@/components/Bubbles";
 import Jellyfish from "@/components/Jellyfish";
 
