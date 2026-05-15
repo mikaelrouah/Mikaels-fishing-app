@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
+import FishCursor from "@/components/FishCursor";
+import Bubbles from "@/components/Bubbles";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -15,13 +17,13 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Cape Angler — Knots, Spots & Gear for Cape Town Fishing",
+  title: "Cape Angler — Immersive Cape Town Fishing Guide",
   description:
-    "A focused, no-nonsense reference for recreational anglers fishing the Cape. Essential knots, top Cape Town fishing spots, curated reading and current gear deals.",
+    "An immersive underwater guide for recreational anglers fishing the Cape. Essential knots, top spots and curated reading.",
   openGraph: {
     title: "Cape Angler",
     description:
-      "Essential knots, top Cape Town fishing spots, curated reading and current gear deals — rods, reels, line, lures, sabikis and tools.",
+      "Essential knots, top Cape Town fishing spots and curated reading for recreational anglers.",
     type: "website"
   }
 };
@@ -33,7 +35,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <FishCursor />
+        <Bubbles />
+        {children}
+      </body>
     </html>
   );
 }

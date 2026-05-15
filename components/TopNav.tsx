@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 const links = [
   { href: "#knots", label: "Knots" },
   { href: "#spots", label: "Spots" },
-  { href: "#reading", label: "Reading" },
-  { href: "#deals", label: "Deals" }
+  { href: "#reading", label: "Reading" }
 ];
 
 export default function TopNav() {
@@ -24,7 +23,7 @@ export default function TopNav() {
     <header
       className={`sticky top-0 z-40 transition-all ${
         scrolled
-          ? "backdrop-blur bg-paper/85 border-b border-ocean/10"
+          ? "backdrop-blur-md bg-white/5 border-b border-white/10"
           : "bg-transparent"
       }`}
     >
@@ -35,7 +34,7 @@ export default function TopNav() {
         <a href="#top" className="flex items-center gap-2 group" aria-label="Cape Angler home">
           <svg
             viewBox="0 0 32 32"
-            className="h-8 w-8 text-ocean"
+            className="h-8 w-8 text-cyan-400"
             aria-hidden
           >
             <path
@@ -47,17 +46,17 @@ export default function TopNav() {
             />
             <circle cx="24" cy="14" r="1.1" fill="currentColor" />
           </svg>
-          <span className="font-display text-lg text-ocean tracking-tight">
+          <span className="font-display text-lg text-white tracking-tight group-hover:text-cyan-400 transition-colors">
             Cape Angler
           </span>
         </a>
 
-        <ul className="hidden md:flex items-center gap-7 text-sm text-ink/80">
+        <ul className="hidden md:flex items-center gap-7 text-sm text-white/70">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="hover:text-ocean transition-colors"
+                className="hover:text-cyan-400 transition-colors"
               >
                 {l.label}
               </a>
@@ -70,7 +69,7 @@ export default function TopNav() {
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="md:hidden rounded-full border border-ocean/20 p-2 text-ocean"
+          className="md:hidden rounded-full border border-cyan-400/20 p-2 text-cyan-400 hover:bg-cyan-400/10 transition-colors"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             {open ? (

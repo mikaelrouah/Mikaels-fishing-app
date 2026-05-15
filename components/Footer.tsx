@@ -1,5 +1,3 @@
-import dealsData from "@/content/deals.json";
-
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
@@ -13,8 +11,8 @@ export default function Footer() {
           </p>
         </div>
         <div className="text-xs text-ink/60 md:text-right">
-          <p>Content last updated: {dealsData.lastUpdated}</p>
-          <p className="mt-1">© {year} Cape Angler · Fish ethically, keep what you&rsquo;ll eat.</p>
+          <p>Fish ethically, keep what you&rsquo;ll eat.</p>
+          <p className="mt-1">© {year} Cape Angler · Cape Town, South Africa.</p>
         </div>
       </div>
     </footer>
