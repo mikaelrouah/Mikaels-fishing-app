@@ -1,5 +1,5 @@
 {
   "/_not-found/page": "/_not-found",
-  "/page": "/",
-  "/api/conditions/route": "/api/conditions"
+  "/api/conditions/route": "/api/conditions",
+  "/page": "/"
 }

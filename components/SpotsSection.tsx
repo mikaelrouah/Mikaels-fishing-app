@@ -145,7 +145,7 @@ export default function SpotsSection() {
           </p>
         </Reveal>
 
-        <div className="mt-10">
+        <div className="mt-12 max-w-4xl mx-auto">
           <BestSpotToday />
         </div>
 

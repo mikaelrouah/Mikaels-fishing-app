@@ -7,37 +7,37 @@ export default function FishCursor() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [burst, setBurst] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [isHome, setIsHome] = useState(false);
   const fishRef = useRef<HTMLDivElement>(null);
   
   const mouse = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0, angle: 0, flip: 1 });
-  const lastMouse = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setHidden(true);
-      return;
-    }
-    setHidden(false);
+    setIsHome(pathname === "/");
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isHome) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!visible) setVisible(true);
       mouse.current = { x: e.clientX, y: e.clientY };
     };
 
-    const triggerBurst = () => {
+    const handleExit = () => {
       if (!visible || burst) return;
       setBurst(true);
       setTimeout(() => {
         setVisible(false);
         setBurst(false);
-      }, 800);
+      }, 600);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", triggerBurst);
-    window.addEventListener("click", triggerBurst);
+    // Disappear on clicks or any scroll (indicates interaction)
+    window.addEventListener("mousedown", handleExit);
+    window.addEventListener("scroll", handleExit, { passive: true });
 
     let frameId: number;
     const update = () => {
@@ -46,26 +46,30 @@ export default function FishCursor() {
         return;
       }
 
-      // Chase logic: stay slightly behind and offset
-      const lerp = 0.04; 
-      const targetX = mouse.current.x;
-      const targetY = mouse.current.y;
+      // Chase logic with offset - stay slightly behind and to the side
+      const lerp = 0.05;
+      const offsetDist = 40; 
+      const dx_mouse = mouse.current.x - pos.current.x;
+      const dy_mouse = mouse.current.y - pos.current.y;
+      const dist = Math.sqrt(dx_mouse * dx_mouse + dy_mouse * dy_mouse);
       
-      const dx = targetX - pos.current.x;
-      const dy = targetY - pos.current.y;
-      
-      pos.current.x += dx * lerp;
-      pos.current.y += dy * lerp;
+      // Only move if mouse is a bit away to create that "next to" feel
+      if (dist > offsetDist) {
+        const targetX = mouse.current.x - (dx_mouse / dist) * offsetDist;
+        const targetY = mouse.current.y - (dy_mouse / dist) * offsetDist;
+        
+        pos.current.x += (targetX - pos.current.x) * lerp;
+        pos.current.y += (targetY - pos.current.y) * lerp;
+      }
 
-      // Calculate angle and flip
-      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-      const flip = dx < 0 ? -1 : 1;
-
-      // Update fish styles - use scaleX for flip to avoid upside down
-      // When flip is -1, we need to adjust the rotation because the fish is facing the other way
-      const displayAngle = flip === -1 ? angle + 180 : angle;
+      const angle = Math.atan2(dy_mouse, dx_mouse) * (180 / Math.PI);
+      // Flip logic with a smoother transition feel
+      const newFlip = dx_mouse < 0 ? -1 : 1;
+      pos.current.flip = newFlip;
       
-      fishRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) scaleX(${flip}) rotate(${displayAngle}deg)`;
+      const displayAngle = pos.current.flip === -1 ? angle + 180 : angle;
+      
+      fishRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) scaleX(${pos.current.flip}) rotate(${displayAngle}deg)`;
 
       frameId = requestAnimationFrame(update);
     };
@@ -73,49 +77,73 @@ export default function FishCursor() {
     frameId = requestAnimationFrame(update);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", triggerBurst);
-      window.removeEventListener("click", triggerBurst);
+      window.removeEventListener("mousedown", handleExit);
+      window.removeEventListener("scroll", handleExit);
       cancelAnimationFrame(frameId);
     };
-  }, [pathname, visible, burst]);
+  }, [isHome, visible, burst]);
 
-  if (hidden || !visible) return null;
+  if (!isHome || (!visible && !burst)) return null;
 
   return (
     <div
       ref={fishRef}
-      className={`fixed top-0 left-0 pointer-events-none z-[9999] -ml-10 -mt-5 transition-opacity duration-500 ${burst ? "animate-fish-burst opacity-0" : "opacity-100"}`}
+      className={`fixed top-0 left-0 pointer-events-none z-[9999] -ml-12 -mt-6 transition-opacity duration-500 ${burst ? "animate-fish-burst opacity-0" : "opacity-100"}`}
+      style={{ 
+        // Use a filter to give it a painted look
+        filter: "url(#paint-texture) drop-shadow(0 4px 12px rgba(0,0,0,0.4))",
+        transition: "transform 0.1s ease-out, opacity 0.5s ease-in-out"
+      }}
     >
-      <svg width="100" height="50" viewBox="0 0 100 50" fill="none" className="drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-        {/* Tail Fin - animated wiggle */}
-        <path d="M15 25 L0 10 Q10 25 0 40 L15 25" fill="#FF9F1C" className="animate-fish-tail origin-right" />
-        
-        {/* Body Gradient */}
+      <svg width="120" height="60" viewBox="0 0 100 50" fill="none">
         <defs>
-          <linearGradient id="goldfishBody" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FF9F1C" />
-            <stop offset="50%" stopColor="#FFBF69" />
-            <stop offset="100%" stopColor="#FF9F1C" />
+          {/* Painting texture filter */}
+          <filter id="paint-texture">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+          </filter>
+
+          <linearGradient id="goldfishGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#ff7b00" />
+            <stop offset="50%" stopColor="#ffb700" />
+            <stop offset="100%" stopColor="#ff9500" />
           </linearGradient>
         </defs>
 
-        {/* Main Body (Goldfish) */}
-        <path d="M15 25 C15 10 40 5 75 12 C85 16 90 22 90 25 C90 28 85 34 75 38 C40 45 15 40 15 25Z" fill="url(#goldfishBody)" />
+        {/* Tail - Improved wiggle */}
+        <path 
+          d="M20 25 L5 5 Q15 25 5 45 L20 25" 
+          fill="#ff7b00" 
+          className="animate-fish-tail origin-right" 
+          stroke="#e85d04"
+          strokeWidth="1"
+        />
+
+        {/* Main Body */}
+        <path 
+          d="M20 25 C20 5 45 2 80 12 C90 16 95 22 95 25 C95 28 90 34 80 38 C45 48 20 45 20 25Z" 
+          fill="url(#goldfishGrad)" 
+          stroke="#e85d04"
+          strokeWidth="1.5"
+        />
         
         {/* Eye */}
-        <circle cx="80" cy="20" r="3" fill="white" />
-        <circle cx="81.5" cy="19" r="1.5" fill="black" />
+        <circle cx="85" cy="20" r="3.5" fill="white" />
+        <circle cx="86.5" cy="19" r="1.8" fill="black" />
 
-        {/* Shark Fin (strapped on) */}
-        <path d="M40 12 L55 0 L65 12 Z" fill="#457B9D" />
+        {/* Shark Fin strapped on */}
+        <path d="M45 12 L65 -5 L75 12 Z" fill="#457b9d" stroke="#1d3557" strokeWidth="1" />
+        <path d="M45 12 Q60 15 75 12" stroke="#1d3557" strokeWidth="2" fill="none" />
+        {/* Harness strap around belly */}
+        <path d="M46 12 Q50 40 73 12" stroke="#1d3557" strokeWidth="1" fill="none" opacity="0.4" />
+
+        {/* Painted detail lines */}
+        <path d="M30 25 Q50 28 75 25" stroke="#e85d04" strokeWidth="0.5" opacity="0.3" />
+        <path d="M35 15 Q55 18 70 15" stroke="#e85d04" strokeWidth="0.5" opacity="0.2" />
         
-        {/* Harness / Strap */}
-        <path d="M40 12 Q52 14 65 12" stroke="#1D3557" strokeWidth="1.5" fill="none" />
-        <path d="M42 12 Q45 35 63 12" stroke="#1D3557" strokeWidth="1" fill="none" opacity="0.6" />
-
         {/* Fins */}
-        <path d="M35 10 Q45 2 55 10" fill="#FF9F1C" opacity="0.8" />
-        <path d="M45 28 Q40 38 55 35 Z" fill="#FF9F1C" opacity="0.7" />
+        <path d="M40 10 Q50 2 60 10" fill="#ff7b00" opacity="0.6" />
+        <path d="M50 35 Q45 45 60 40 Z" fill="#ff7b00" opacity="0.5" />
       </svg>
     </div>
   );
